@@ -1,14 +1,58 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { profile } from "../data/profile";
+
+// Indonesian local number (08xx) -> international format (628xx) for wa.me links.
+const waNumber = profile.phone.replace(/^0/, "62");
+
+type Status = "idle" | "sending" | "sent" | "error";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<Status>("idle");
+
+  const subject = `Portfolio inquiry from ${form.name || "website visitor"}`;
 
   const mailtoHref = `mailto:${profile.email}?subject=${encodeURIComponent(
-    `Portfolio inquiry from ${form.name || "website visitor"}`
+    subject
   )}&body=${encodeURIComponent(
     `${form.message}\n\n— ${form.name || ""} (${form.email || ""})`
   )}`;
+
+  const waHref = `https://wa.me/${waNumber}?text=${encodeURIComponent(
+    form.message
+      ? `Hi Kadek, I'm ${form.name || "a visitor"} from your portfolio website.\n\n${form.message}`
+      : "Hi Kadek, I found you through your portfolio website."
+  )}`;
+
+  async function sendEmail(e: FormEvent) {
+    e.preventDefault();
+    // Without a Web3Forms key, fall back to opening the visitor's email client.
+    if (!profile.web3formsKey) {
+      window.location.href = mailtoHref;
+      return;
+    }
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: profile.web3formsKey,
+          subject,
+          from_name: form.name,
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message);
+      setStatus("sent");
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
+  }
 
   return (
     <section id="contact" className="py-20 bg-gray-100">
@@ -28,8 +72,8 @@ export default function Contact() {
               </a>
             </li>
             <li>
-              <span className="font-medium text-gray-900">Phone: </span>
-              <a href={`tel:${profile.phone}`} className="hover:text-[#800000]">
+              <span className="font-medium text-gray-900">WhatsApp: </span>
+              <a href={`https://wa.me/${waNumber}`} target="_blank" rel="noreferrer" className="hover:text-[#800000]">
                 {profile.phone}
               </a>
             </li>
@@ -62,10 +106,11 @@ export default function Contact() {
           </ul>
         </div>
 
-        <form className="space-y-4 bg-white p-6 rounded shadow h-fit" onSubmit={(e) => e.preventDefault()}>
+        <form className="space-y-4 bg-white p-6 rounded shadow h-fit" onSubmit={sendEmail}>
           <input
             type="text"
             placeholder="Your Name"
+            required
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             className="w-full border border-gray-300 p-3 rounded"
@@ -73,6 +118,7 @@ export default function Contact() {
           <input
             type="email"
             placeholder="Your Email"
+            required
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
             className="w-full border border-gray-300 p-3 rounded"
@@ -80,20 +126,40 @@ export default function Contact() {
           <textarea
             placeholder="Your Message"
             rows={5}
+            required
             value={form.message}
             onChange={(e) => setForm({ ...form, message: e.target.value })}
             className="w-full border border-gray-300 p-3 rounded"
           ></textarea>
 
-          <a
-            href={mailtoHref}
-            className="block text-center w-full bg-[#800000] text-white py-3 rounded hover:bg-[#5c0000] transition"
-          >
-            Send Message
-          </a>
-          <p className="text-xs text-gray-400 text-center">
-            Opens your email client to send this message directly to {profile.email}.
-          </p>
+          <div className="grid sm:grid-cols-2 gap-3">
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              className="w-full bg-[#800000] text-white py-3 rounded hover:bg-[#5c0000] transition disabled:opacity-60"
+            >
+              {status === "sending" ? "Sending..." : "Send via Email"}
+            </button>
+            <a
+              href={waHref}
+              target="_blank"
+              rel="noreferrer"
+              className="block text-center w-full bg-[#25D366] text-white py-3 rounded hover:bg-[#1da851] transition"
+            >
+              Chat on WhatsApp
+            </a>
+          </div>
+
+          {status === "sent" && (
+            <p className="text-sm text-green-700 text-center">
+              Thanks! Your message has been sent. I'll get back to you soon.
+            </p>
+          )}
+          {status === "error" && (
+            <p className="text-sm text-red-700 text-center">
+              Something went wrong. Please try WhatsApp or email {profile.email} directly.
+            </p>
+          )}
         </form>
       </div>
     </section>
