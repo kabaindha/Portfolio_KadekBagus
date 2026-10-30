@@ -125,7 +125,7 @@ export const skills = {
   ],
   soft: ["Leadership", "Problem Solving", "Critical Thinking", "Communication"],
   tools: ["Git", "GitHub", "Postman", "Visual Studio Code", "Figma"],
-  languages: ["Indonesian (Native)", "English (Upper-Intermediate)"],
+  languages: ["Indonesian (Native)", "English (Intermediate)"],
 };
 
 export type ProjectItem = {
