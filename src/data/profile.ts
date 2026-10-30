@@ -3,15 +3,14 @@
 
 export const profile = {
   name: "Kadek Bagus Indra Dharmawan",
-  title: "Full Stack Web Developer",
+  title: "Full Stack Web Development",
   location: "Tangerang, Indonesia",
   phone: "082110368717",
   email: "kbagus.dharmawan@gmail.com",
   linkedin: "https://www.linkedin.com/in/kadek-bagus-indra-d-7a1739172/",
   github: "https://github.com/kabaindha",
-  cvFile: "/Kadek_Bagus_Indra_Dharmawan_CV.pdf",
   summary:
-    "Industrial Engineering graduate with professional experience in production supervision and operational leadership. Currently pursuing a Full-Stack Web Developer Bootcamp at Purwadhika Digital Technology School, focusing on modern web technologies such as React, Node.js, TypeScript, and relational databases. Experienced in building user-centered digital solutions through software development and UX research methodologies.",
+    "Industrial Engineering graduate with professional experience in production supervision and operational leadership. Currently pursuing a Full-Stack Web Development Bootcamp at Purwadhika Digital Technology School, focusing on modern web technologies such as React, Node.js, TypeScript, and relational databases. Experienced in building user-centered digital solutions through software development and UX research methodologies.",
 };
 
 export type ExperienceItem = {
@@ -72,7 +71,7 @@ export type EducationItem = {
 export const education: EducationItem[] = [
   {
     school: "Purwadhika Digital Technology School",
-    degree: "Full Stack Web Developer",
+    degree: "Full Stack Web Development",
     period: "2025",
   },
   {
@@ -97,7 +96,7 @@ export type CertificationItem = {
 export const certifications: CertificationItem[] = [
   {
     issuer: "Purwadhika Digital Technology School",
-    name: "Fullstack Web Developer",
+    name: "Fullstack Web Development",
     period: "2026",
     link: "https://drive.google.com/file/d/10PlYWqvhmdkS9CmiklBLGmV2YexRjogt/view?usp=sharing",
   },

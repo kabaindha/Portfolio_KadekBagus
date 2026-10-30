@@ -16,7 +16,7 @@ export default function Contact() {
         <div>
           <h2 className="text-4xl font-bold mb-6 text-gray-900">Contact Me</h2>
           <p className="text-gray-600 mb-8 max-w-md">
-            Open to full-stack web developer opportunities and collaborations.
+            Open to full-stack web development opportunities and collaborations.
             Feel free to reach out through any of the channels below.
           </p>
 

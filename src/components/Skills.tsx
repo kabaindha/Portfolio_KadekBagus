@@ -6,6 +6,17 @@ import reactLogo from "../assets/skills/react.png";
 import tailwindLogo from "../assets/skills/tailwind.png";
 import gitLogo from "../assets/skills/git.png";
 import figmaLogo from "../assets/skills/figma.png";
+import viteLogo from "../assets/skills/vite.svg";
+import nodeLogo from "../assets/skills/nodejs.svg";
+import expressLogo from "../assets/skills/express.svg";
+import sqlLogo from "../assets/skills/sql.svg";
+import prismaLogo from "../assets/skills/prisma.svg";
+import restApiLogo from "../assets/skills/rest-api.svg";
+import uxResearchLogo from "../assets/skills/ux-research.svg";
+import usabilityLogo from "../assets/skills/usability-testing.svg";
+import githubLogo from "../assets/skills/github.svg";
+import postmanLogo from "../assets/skills/postman.svg";
+import vscodeLogo from "../assets/skills/vscode.svg";
 import { skills } from "../data/profile";
 
 const iconMap: Record<string, string> = {
@@ -14,9 +25,19 @@ const iconMap: Record<string, string> = {
   JavaScript: jsLogo,
   TypeScript: tsLogo,
   React: reactLogo,
+  Vite: viteLogo,
   "Tailwind CSS": tailwindLogo,
+  "Node.js": nodeLogo,
+  "Express.js": expressLogo,
+  SQL: sqlLogo,
+  "Prisma ORM": prismaLogo,
+  "REST API Development": restApiLogo,
+  "UX Research": uxResearchLogo,
+  "Usability Testing": usabilityLogo,
   Git: gitLogo,
-  GitHub: gitLogo,
+  GitHub: githubLogo,
+  Postman: postmanLogo,
+  "Visual Studio Code": vscodeLogo,
   Figma: figmaLogo,
 };
 
@@ -24,7 +45,8 @@ const techSkills = ["HTML", "CSS", ...skills.hard];
 
 function Badge({ label }: { label: string }) {
   return (
-    <span className="px-4 py-2 bg-white shadow rounded-full text-sm font-medium text-gray-800">
+    <span className="inline-flex items-center gap-2 px-4 py-2 bg-white shadow rounded-full text-sm font-medium text-gray-800">
+      {iconMap[label] && <img src={iconMap[label]} alt="" className="w-4 h-4 object-contain" />}
       {label}
     </span>
   );

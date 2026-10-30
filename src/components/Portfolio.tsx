@@ -1,16 +1,20 @@
 import ikeaImg from "../assets/images/project1.jpg";
+import primecareImg from "../assets/images/primecare.jpg";
+import evetixImg from "../assets/images/evetix.jpg";
 import type { ProjectItem } from "../data/profile";
 
 const projects: ProjectItem[] = [
   {
     title: "PrimeCare",
-    subtitle: "Full-Stack Web Developer Final Project — Purwadhika",
+    subtitle: "Full-Stack Web Development Final Project — Purwadhika",
     desc: "A full-stack laundry management system covering customer management, order processing, pickup requests, payment handling, and role-based administration.",
     tags: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express.js", "Prisma", "PostgreSQL"],
     links: [
+      { label: "Live Demo", url: "https://primecare-web.vercel.app" },
       { label: "Frontend", url: "https://github.com/kabaindha/primecare-web" },
       { label: "Backend", url: "https://github.com/kabaindha/primecare-api" },
     ],
+    image: primecareImg,
   },
   {
     title: "EveTix",
@@ -21,6 +25,7 @@ const projects: ProjectItem[] = [
       { label: "Frontend", url: "https://github.com/rwxjejedx/EveTix_frontend" },
       { label: "Backend", url: "https://github.com/rwxjejedx/backend" },
     ],
+    image: evetixImg,
   },
   {
     title: "IKEA Mobile App Revamp",
@@ -30,6 +35,10 @@ const projects: ProjectItem[] = [
     links: [
       {
         label: "Research Deck",
+        url: "https://drive.google.com/file/d/1NcC_RUUdldKRWGqO6BlBFGBntqDxNy-5/view?usp=sharing",
+      },
+      {
+        label: "Other Study Case",
         url: "https://drive.google.com/drive/folders/1-8lwJL5p8xjcTOWtaSrcqoPi0c2bPyxh?usp=drive_link",
       },
     ],
