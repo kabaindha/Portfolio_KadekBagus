@@ -11,7 +11,7 @@ export const profile = {
   github: "https://github.com/kabaindha",
   // Web3Forms access key (https://web3forms.com) so the contact form emails
   // directly; it's safe to expose. Leave empty to fall back to mailto.
-  web3formsKey: "",
+  web3formsKey: "2d50c3da-5c66-4de6-88c9-d031c6329618",
   summary:
     "Industrial Engineering graduate with professional experience in production supervision and operational leadership. Currently pursuing a Full-Stack Web Development Bootcamp at Purwadhika Digital Technology School, focusing on modern web technologies such as React, Node.js, TypeScript, and relational databases. Experienced in building user-centered digital solutions through software development and UX research methodologies.",
 };
